@@ -10,7 +10,9 @@
 
                         <div class="flex justify-between items-center bg-gray-200 p-5 rounded-md">
                             <div>
-                                <h1 class="text-xl text-semibold">Products (total)</h1>
+                                <h1 class="text-xl text-semibold">Products ({{$totalProducts}})</h1>
+                                {{-- {{ $products }} --}}
+                                {{-- {{ dd($products) }} --}}
                             </div>
                             <div>
                                 <a href="#" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Add
@@ -23,22 +25,23 @@
                                     <div class="overflow-hidden">
                                         <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                                             <thead class="bg-gray-100 dark:bg-gray-700">
+                                          
                                                 <tr>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        #
+                                               id
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Name
+                                                              title
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Category
+                                                       category
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                        Price
+                                                       price
                                                     </th>
                                                     <th scope="col"
                                                         class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -49,28 +52,29 @@
                                                         Delete
                                                     </th>
                                                 </tr>
+                                              
                                             </thead>
                                             <tbody
                                                 class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
-
+      @foreach($products as $product)
                                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                                     <td
                                                         class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                        id
+                                                            {{$product->id}}
 
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        product->title
+                                                       {{$product->title}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        product->category
+                                                           {{$product->category}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        product->price
+                                                             {{$product->price}}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -83,7 +87,7 @@
                                                             class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md">Delete</a>
                                                     </td>
                                                 </tr>
-                                                --------
+                                               @endforeach
                                                 <tr>
                                                     <td>
                                                         <h2>Product Not found</h2>
