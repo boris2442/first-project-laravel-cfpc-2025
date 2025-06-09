@@ -32,7 +32,7 @@
                                 <h1 class="text-xl text-semibold">Products (total)</h1>
                             </div>
                             <div>
-                                <a href="create.html" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Add
+                                <a href="#" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Add
                                     New</a>
                             </div>
                         </div>
