@@ -1,5 +1,5 @@
 @extends('layouts.website.layout-website')
-@section(section: 'content')
+@section('content')
     <div class="container mx-auto max-w-xl shadow py-4 px-10">
         <a href="index.html" class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md">Go Back</a>
         <div class="my-3">
@@ -32,4 +32,4 @@
             </form>
         </div>
     </div>
-@endsection()
+@endsection
