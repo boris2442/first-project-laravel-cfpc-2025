@@ -16,7 +16,8 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        return
+         [
             "title" => $this->faker->word(3, true),
             "category" => $this->faker->randomElement(['ielectronics', 'furniture', 'clothing', 'toys']),
             "price" => $this->faker->numberBetween(100, 30000),

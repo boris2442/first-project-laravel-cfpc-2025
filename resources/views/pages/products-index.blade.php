@@ -15,7 +15,7 @@
                                 {{-- {{ dd($products) }} --}}
                             </div>
                             <div>
-                                <a href="#" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Add
+                                <a href="{{route('products.create')}}" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Add
                                     New</a>
                             </div>
                         </div>
@@ -88,6 +88,7 @@
                                                     </td>
                                                 </tr>
                                                @endforeach
+
                                                 <tr>
                                                     <td>
                                                         <h2>Product Not found</h2>
@@ -97,6 +98,8 @@
 
                                             </tbody>
                                         </table>
+                                        
+                                        {{ $products->links() }}
                                     </div>
                                 </div>
                             </div>

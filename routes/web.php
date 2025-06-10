@@ -6,6 +6,5 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [ProductController::class, 'index'])->name('products.index');
-// Route::get('/product/create', function(){
-//     return view('pages.products-create');
-// })
+Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
