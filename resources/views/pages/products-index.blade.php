@@ -13,7 +13,7 @@
                             <div class='bg-green-300 text-green-600 px-4 py-2'>{{ session('success') }}</div>
                         @endif
 
-                        <div class="flex justify-between items-center bg-gray-200 p-5 rounded-md">
+                        <div class="flex justify-between items-center bg-gray-200 p-5 rounded-md mt-4">
                             <div>
                                 <h1 class="text-xl text-semibold">Products (
                                     {{ $totalProducts }})
@@ -57,7 +57,7 @@
                                                         Edit
                                                     </th>
                                                     <th scope="col"
-                                                        class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                        class="text-sm  font-medium text-gray-900 px-6 py-4 text-left">
                                                         Delete
                                                     </th>
                                                 </tr>
@@ -87,13 +87,19 @@
                                                         </td>
                                                         <td
                                                             class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                            <a href="#"
+                                                            <a href="{{ route('products.edit',['id'=>$product->id]) }}"
+                                                                {{-- {{ route('products.edit', $product->id) }} --}}    
                                                                 class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Edit</a>
                                                         </td>
                                                         <td
                                                             class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                            <a href="#"
-                                                                class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md">Delete</a>
+                                                            <form method='post' action="{{route('products.destroy', ['id'=>$product->id])}}">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md" type="submit" onClick="return confirm('Are you sure you to delete this product?')">Delete</button>
+
+                                                          
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @endforeach
