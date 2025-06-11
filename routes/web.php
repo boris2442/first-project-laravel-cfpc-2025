@@ -12,3 +12,7 @@ route::get('/products/edit/{id}',
  [ProductController::class, 'edit'])->name('products.edit');
 route::patch('/products/update{id}', [ProductController::class, 'update'])->name('products.update');
 route::delete('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+Route::get('/{any}', function(){
+    return view('notFoundPage');
+})->where('any', '.*');

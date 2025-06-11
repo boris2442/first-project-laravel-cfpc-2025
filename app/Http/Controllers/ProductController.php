@@ -21,12 +21,13 @@ class ProductController extends Controller
     }
     public function store(Request $request) //Enregistre les données dans la base
     {
-        $validation = $request->validate([
-
-            "title" => "required|string|max:244",
-            "category" => "required|string|max:244|",
-            "price" => "required|numeric|min:0"
-        ]);
+        $validation = $request->validate(
+                [
+                    "title" => "required|string|max:244",
+                    "category" => "required|string|max:244|",
+                    "price" => "required|numeric|min:0"
+                ]
+            );
 
 
         // Product::create($request->all());//ici elle accepte tout
