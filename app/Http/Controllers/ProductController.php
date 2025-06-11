@@ -23,8 +23,8 @@ class ProductController extends Controller
     {
         $validation = $request->validate([
 
-            "title" => "required|max:244",
-            "category" => "required|max:244",
+            "title" => "required|string|max:244",
+            "category" => "required|string|max:244|unique",
             "price" => "required|numeric|min:0",
         ]);
 

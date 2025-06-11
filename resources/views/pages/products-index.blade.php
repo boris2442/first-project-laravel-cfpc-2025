@@ -16,12 +16,12 @@
                         <div class="flex justify-between items-center bg-gray-200 p-5 rounded-md mt-4">
                             <div>
                                 <h1 class="text-xl text-semibold">Products total: (
-                                    {{ $totalProducts }})////////////
+                                          {{ $totalProducts }}
+                                    )////////////
                                     product/page:({{ $products->count() }})
                 
                                 </h1>
-                                {{-- {{ $products }} --}}
-                                {{-- {{ dd($products) }} --}}
+                          
                             </div>
                             <div>
                                 <a href="{{ route('products.create') }}"
