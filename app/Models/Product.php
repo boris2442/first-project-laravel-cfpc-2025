@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
  use HasFactory;
- protected $fillable=[
-    'title',
-    'category',
-    'price',
- ];
+ //protected $fillable=[ //il s'agit de l'insertion de mass
+  //  'title',
+ //   'category',
+  //  'price',
+ //];
+protected $guarded=[];
 }
