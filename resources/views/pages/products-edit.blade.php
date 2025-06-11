@@ -3,7 +3,7 @@
     <div class="container mx-auto max-w-xl shadow py-4 px-10">
         <a href="{{ route('products.index') }}" class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md">Go Back</a>
         <div class="my-3">
-            <h1 class="text-center text-3xl font-bold">Edit product</h1>Edit </h1>
+            <h1 class="text-center text-3xl font-bold">Edit product Edit </h1>
             <form
              action="{{ route('products.update', $product->id) }}"
              method="POST"

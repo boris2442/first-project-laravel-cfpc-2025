@@ -11,7 +11,7 @@ class ProductController extends Controller
     {
         // $products=Product::all();
         $products = Product::orderBy('id', 'desc')->paginate(5);
-        $totalProducts = $products->count();
+        $totalProducts =Product::count();
         return view('pages.products-index', compact('products', 'totalProducts'));
     }
 
