@@ -17,9 +17,7 @@
         @endif
     </head>
     <body class="antialiased bg-gray-100 dark:bg-gray-900">
-       
-       
-        <h1 class=" font-semibold text-center text-green-900 dark:text-white text-7xl">
+       <h1 class=" font-semibold text-center text-green-900 dark:text-white text-7xl">
           hello word
         </h1>
 
