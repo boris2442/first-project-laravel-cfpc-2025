@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+// use App\Http\Controllers\ProductsExport;
+use App\Http\Controllers\Controller;
+use App\Exports\ProductsExport;
 
 class ProductController extends Controller
 {
@@ -33,7 +37,7 @@ class ProductController extends Controller
             // Sinon on garde 1 décimale max (ex: 2250 → 2.25k)
             return number_format($divided, ($divided < 10) ? 2 : 1, '.', '') . 'k';
         }
-        return $number;// Retourne tel quel si < 1000
+        return $number; // Retourne tel quel si < 1000
     }
 
 
@@ -86,5 +90,11 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
         return redirect()->route('products.index')->with('error', 'Product deleted successfully');
+    }
+
+    public function excel()
+    {
+        $fileName = now()->format('Y-m-d_H-i-s');
+        return Excel::download(new ProductsExport, 'products_' . $fileName . '.xlsx');
     }
 }

@@ -15,13 +15,16 @@
 
                         <div class="flex justify-between items-center bg-gray-200 p-5 rounded-md mt-4">
                             <div>
-                                <h1 class="text-xl text-semibold">Products total: (
+                                <span class="text-xl text-semibold">Products total: (
                                     {{ $totalProducts }}
                                     )////////////
                                     product/page:({{ $products->count() }})
 
-                                </h1>
+                                </span>
 
+                            </div>
+                            <div class="">
+                                <a href="{{ route('excel') }}" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Export to Excel</a>
                             </div>
                             <div>
                                 <a href="{{ route('products.create') }}"
