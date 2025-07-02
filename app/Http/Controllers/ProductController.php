@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 // use App\Http\Controllers\ProductsExport;
 use App\Http\Controllers\Controller;
 use App\Exports\ProductsExport;
@@ -96,5 +97,17 @@ class ProductController extends Controller
     {
         $fileName = now()->format('Y-m-d_H-i-s');
         return Excel::download(new ProductsExport, 'products_' . $fileName . '.xlsx');
+    }
+    public function downloadAll()
+    {
+        $products = Product::latest()->get();
+        $fileName = "Inventory_" . now()->format('Y-m-d_H-i-s') . ".pdf";
+        $pdf = Pdf::loadView('pages.exports.pdf-all-products', [
+            'products' => $products,
+            'date' => now()->format('d/m/Y/H:i:s'),
+            'totalValue' => $products->sum('price'),
+
+        ]);
+        return  $pdf->download($fileName);
     }
 }
