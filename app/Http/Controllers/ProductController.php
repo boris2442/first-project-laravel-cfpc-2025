@@ -7,13 +7,36 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // Fdelete
     public function index()
     {
-        // $products=Product::all();
+
         $products = Product::orderBy('id', 'desc')->paginate(5);
         $totalProducts = Product::count();
         return view('pages.products-index', compact('products', 'totalProducts'));
     }
+
+    private function formatCount($number)
+    {
+        if ($number >= 1000000) {
+            return round($number / 1000000, 1) . 'M'; // Pour les millions
+        }
+        if ($number >= 1000) {
+            // Logique pour déterminer la précision
+            $divided = $number / 1000;
+
+            // Si c'est un nombre rond (ex: 2000 → 2k)
+            if ($number % 1000 === 0) {
+                return $divided . 'k';
+            }
+
+            // Sinon on garde 1 décimale max (ex: 2250 → 2.25k)
+            return number_format($divided, ($divided < 10) ? 2 : 1, '.', '') . 'k';
+        }
+        return $number;// Retourne tel quel si < 1000
+    }
+
+
 
     public function create() ///methode pour afficher le formulaire de creation
     {
@@ -22,12 +45,12 @@ class ProductController extends Controller
     public function store(Request $request) //Enregistre les données dans la base
     {
         $validation = $request->validate(
-                [
-                    "title" => "required|string|max:244",
-                    "category" => "required|string|max:244|",
-                    "price" => "required|numeric|min:0"
-                ]
-            );
+            [
+                "title" => "required|string|max:244",
+                "category" => "required|string|max:244|",
+                "price" => "required|numeric|min:0"
+            ]
+        );
 
 
         // Product::create($request->all());//ici elle accepte tout
@@ -64,8 +87,4 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index')->with('error', 'Product deleted successfully');
     }
-    // public function show(Product $product)
-    // {
-    //     return view('pages.products-show', compact('product'));
-    // }
 }

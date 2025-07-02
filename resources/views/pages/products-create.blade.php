@@ -5,8 +5,11 @@
             Back</a>
         <div class="my-3">
             <h1 class="text-center text-3xl font-bold">Create Product</h1>
-            <form action="{{ route('products.store') }}" method="POST">
+            <form action="{{route('products.store') }}" method="POST">
                 @csrf
+                {{-- la directive
+                @csrf permet d'indexxer uniquement ce formulaire
+                 --}}
                 <div class="my-2">
                     <label for="title" class="text-md font-bold">Product Name</label>
                     <input type="text" id="title" value="{{ old('title') }}" name="title"
