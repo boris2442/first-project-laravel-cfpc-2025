@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/excel', [ProductController::class, 'excel'])->name('excel');
+Route::get('/download-all', [ProductController::class, 'downloadAll'])->name('downloadAll');
 Route::get('/', [ProductController::class, 'index'])->name('products.index');
 Route::get('/create', [ProductController::class, 'create'])->name('products.create');
 route::post('/products/store', [ProductController::class, 'store'])->name('products.store');

@@ -1,18 +1,18 @@
 <table>
     <thead>
-    <tr>
-        <th>Title</th>
-        <th>category</th>
-        <th>price</th>
-    </tr>
+        <tr>
+            <th>Title</th>
+            <th>category</th>
+            <th>price</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach($products as $product)
+        @foreach($products as $product)
         <tr>
-            <td>{{ $product->title }}</td>
-            <td>{{ $product->category }}</td>
-            <td>{{ $product->price }}</td>
+            <td w='20' align='center'>{{ $product->title }}</td>
+            <td w='20' align='center'>{{ $product->category }}</td>
+            <td w='20' align='center'>{{ $product->price }}</td>
         </tr>
-    @endforeach
+        @endforeach
     </tbody>
 </table>
