@@ -16,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             [
                 'Excel' => Maatwebsite\Excel\Facades\Excel::class,
             ]
-            );
+        );
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

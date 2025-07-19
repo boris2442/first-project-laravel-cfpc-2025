@@ -24,7 +24,10 @@
 
                             </div>
                             <div class="">
-                                <a href="{{ route('excel') }}" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Export to Excel</a>
+                                <a href="{{ route('excel') }}" class="px-5 py-2 bg-[#217346] rounded-md text-white text-lg shadow-md">Export to Excel</a>
+                            </div>
+                            <div class="">
+                                <a href="{{ route('downloadAll') }}" class="px-5 py-2 bg-blue-500 rounded-md text-white text-lg shadow-md">Export to pdf</a>
                             </div>
                             <div>
                                 <a href="{{ route('products.create') }}"

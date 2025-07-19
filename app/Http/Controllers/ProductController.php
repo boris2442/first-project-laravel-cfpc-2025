@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use Barryvdh\DomPDF\Facade\Pdf;
-// use App\Http\Controllers\ProductsExport;
-use App\Http\Controllers\Controller;
 use App\Exports\ProductsExport;
+use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
+// use App\Http\Controllers\ProductsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -18,13 +17,14 @@ class ProductController extends Controller
 
         $products = Product::orderBy('id', 'desc')->paginate(5);
         $totalProducts = Product::count();
+
         return view('pages.products-index', compact('products', 'totalProducts'));
     }
 
     private function formatCount($number)
     {
         if ($number >= 1000000) {
-            return round($number / 1000000, 1) . 'M'; // Pour les millions
+            return round($number / 1000000, 1).'M'; // Pour les millions
         }
         if ($number >= 1000) {
             // Logique pour déterminer la précision
@@ -32,49 +32,52 @@ class ProductController extends Controller
 
             // Si c'est un nombre rond (ex: 2000 → 2k)
             if ($number % 1000 === 0) {
-                return $divided . 'k';
+                return $divided.'k';
             }
 
             // Sinon on garde 1 décimale max (ex: 2250 → 2.25k)
-            return number_format($divided, ($divided < 10) ? 2 : 1, '.', '') . 'k';
+            return number_format($divided, ($divided < 10) ? 2 : 1, '.', '').'k';
         }
+
         return $number; // Retourne tel quel si < 1000
     }
 
-
-
-    public function create() ///methode pour afficher le formulaire de creation
+    public function create() // /methode pour afficher le formulaire de creation
     {
         return view('pages.products-create');
     }
-    public function store(Request $request) //Enregistre les données dans la base
+
+    public function store(Request $request) // Enregistre les données dans la base
     {
         $validation = $request->validate(
             [
-                "title" => "required|string|max:244",
-                "category" => "required|string|max:244|",
-                "price" => "required|numeric|min:0"
+                'title' => 'required|string|max:244',
+                'category' => 'required|string|max:244|',
+                'price' => 'required|numeric|min:0',
             ]
         );
 
-
         // Product::create($request->all());//ici elle accepte tout
         Product::create($validation);
+
         return redirect()->route('products.index')->with('success', 'client add with successfull');
     }
+
     public function edit(int $id)
     {
         $product = Product::findOrFail($id);
+
         return view('pages.products-edit', compact('product'));
     }
+
     public function update(Request $request, int $id)
     {
         $validation = $request->validate([
-            "title" => "required|max:244",
-            "category" => "required|max:244",
-            "price" => "required|numeric|min:0",
+            'title' => 'required|max:244',
+            'category' => 'required|max:244',
+            'price' => 'required|numeric|min:0',
         ]);
-        $product = Product::findOrFail($id);   //recupere donne utilisateur
+        $product = Product::findOrFail($id);   // recupere donne utilisateur
 
         $product->title = $validation['title'];
         $product->category = $validation['category'];
@@ -82,32 +85,36 @@ class ProductController extends Controller
         // $product->update($request->all()); //ici elle accepte tout
 
         $product->save();
+
         return redirect()->route('products.index')->with('success', 'Product updated successfully');
     }
 
-
-    function destroy($id)
+    public function destroy($id)
     {
         $product = Product::findOrFail($id);
         $product->delete();
+
         return redirect()->route('products.index')->with('error', 'Product deleted successfully');
     }
 
     public function excel()
     {
         $fileName = now()->format('Y-m-d_H-i-s');
-        return Excel::download(new ProductsExport, 'products_' . $fileName . '.xlsx');
+
+        return Excel::download(new ProductsExport, 'products_'.$fileName.'.xlsx');
     }
+
     public function downloadAll()
     {
         $products = Product::latest()->get();
-        $fileName = "Inventory_" . now()->format('Y-m-d_H-i-s') . ".pdf";
+        $fileName = 'Inventory_'.now()->format('Y-m-d_H-i-s').'.pdf';
         $pdf = Pdf::loadView('pages.exports.pdf-all-products', [
             'products' => $products,
             'date' => now()->format('d/m/Y/H:i:s'),
             'totalValue' => $products->sum('price'),
 
         ]);
-        return  $pdf->download($fileName);
+
+        return $pdf->download($fileName);
     }
 }
